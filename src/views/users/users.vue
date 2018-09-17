@@ -3,7 +3,6 @@
   <div class="breadcrumb">
     <el-breadcrumb separator="/">
       <el-breadcrumb-item :to="{ path: '/layout/index' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
       <el-breadcrumb-item>用户列表</el-breadcrumb-item>
     </el-breadcrumb>
   </div>
@@ -44,6 +43,13 @@
     </el-table>
   </div>
 
+  <el-pagination
+    background
+    @current-change="currentPage "
+    layout="prev, pager, next"
+    :total="count">
+  </el-pagination>
+
 </div>
 </template>
 
@@ -51,20 +57,20 @@
     export default {
       data() {
         return {
-          tabledata: []
+          tabledata: [],
+          count: 0,
+          page:1
         }
       },
       methods: {
         getData() {
-          this.$axios.get('/user').then(res => {
+          this.$axios.get('/user',{ pn: this.page,size: 5 }).then(res => {
             if (res.code == 200) {
               this.tabledata = res.data
+              this.count= res.count
             }
           })
         },
-        // hendlecheck() {
-        //     router.push
-        // },
         hendledelete(id) {
           this.$confirm('此操作将永久删除该文件, 是否继续?', '警告', {
             confirmButtonText: '确定',
@@ -72,6 +78,7 @@
             type: 'warning',
           }).then(() => {
             this.$axios.post('/user/delete', {userIds: [id]}).then( res => {
+
               this.$message.success(res.msg);
               this.getData();
             })
@@ -81,6 +88,12 @@
               message: '已取消删除'
             });
           });
+        },
+        currentPage(page){
+
+          this.page = page
+          this.getData()
+          console.log(page)
         }
       },
       created() {

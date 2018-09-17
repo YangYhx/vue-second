@@ -5,6 +5,9 @@
 
   </div>
   <div class="sidebar">
+    <div class="userinfo">
+      <img src="{this.userinfo.avatar}" alt="">
+    </div>
     <el-menu
       class="el-menu-vertical-demo"
       background-color="#545c64"
@@ -36,6 +39,7 @@
           <i class="el-icon-location"></i>
           <span>分类管理</span>
         </template>
+         <el-menu-item index="/layout/classlist">分类列表</el-menu-item>
           <el-menu-item index="1-3">添加分类</el-menu-item>
           <el-menu-item index="1-4">删除分类</el-menu-item>
           <el-menu-item index="1-5">修改书籍</el-menu-item>
@@ -63,8 +67,19 @@
 </template>
 
 <script>
+
     export default {
-        name: "layout"
+        name: "layout",
+      data(){
+          return {
+            userdata:{}
+          }
+      },
+      created(){
+          this.$bus.$on('todata',(msg) => {
+            this.userdata = msg
+      })
+      }
     }
 </script>
 
@@ -87,6 +102,22 @@
     background: #545c64;
     width: 200px;
     height: 100vh;
+
+    .userinfo{
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      background: #f1f1f1;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+
+    /deep/ {
+      .el-menu{
+        border-right: none;
+      }
+    }
   }
   .content{
     margin-left: 200px;

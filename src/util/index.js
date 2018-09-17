@@ -16,6 +16,12 @@ const xhr = {
           data,
         }
       },config).then( res => {
+        if(res.code == 401){
+          Message .error("登录状态失效，正在跳转登录界面");
+          setTimeout( () => {
+            Router.push('/')
+          },3000)
+        }
           resolve(res.data)
       }).catch( err => {
         reject(err)
@@ -26,7 +32,7 @@ const xhr = {
   post(url, data,config){
     return new Promise( (resolve , reject) => {
       fe.post(url,data,config).then( res => {
-        if(res.data.code == 401){
+        if(res.code == 401){
           Message .error("登录状态失效，正在跳转登录界面");
           setTimeout( () => {
             Router.push('/')

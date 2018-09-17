@@ -10,7 +10,8 @@ const coms = {
   layout:() => import('@/views/layout/layout'),
   index: () => import('@/views/index/index'),
   adduser: () => import('@/views/adduser/adduser'),
-  users: () => import('@/views/users/users')
+  users: () => import('@/views/users/users'),
+  classlist: () => import('@/views/classlist/classlist')
 }
 export default new Router({
   routes: [
@@ -45,6 +46,11 @@ export default new Router({
             title:'用户列表'
           },
           component:coms.users
+        },
+        {
+          path:'classlist',
+          name:'classlist',
+          component:coms.classlist
         }
 
       ]

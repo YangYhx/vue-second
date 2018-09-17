@@ -20,13 +20,16 @@
 
 <script>
     export default {
+      name:'login',
       data(){
           return{
             form:{
               username:'',
               password:''
+
             },
-            isloading:false
+            isloading:false,
+            userdata:{}
           }
       },
       methods:{
@@ -36,6 +39,8 @@
                 console.log(res)
                 if(res.code == 200){
                   this.$message.success(res.msg)
+
+                  this.$bus.$emit('todata',res.data)
                   setTimeout(() => {
                     this.$router.push('/layout/index')
                   },3000)
@@ -48,7 +53,8 @@
                 this.isloading = false;
               })
           }
-      }
+      },
+
     }
 </script>
 
