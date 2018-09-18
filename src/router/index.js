@@ -11,7 +11,8 @@ const coms = {
   index: () => import('@/views/index/index'),
   adduser: () => import('@/views/adduser/adduser'),
   users: () => import('@/views/users/users'),
-  classlist: () => import('@/views/classlist/classlist')
+  classlist: () => import('@/views/classlist/classlist'),
+  userEdit: () => import('@/views/userEdit/index')
 }
 export default new Router({
   routes: [
@@ -51,6 +52,11 @@ export default new Router({
           path:'classlist',
           name:'classlist',
           component:coms.classlist
+        },
+        {
+          path:'userEdit',
+          name:'userEdit',
+          component:coms.userEdit
         }
 
       ]

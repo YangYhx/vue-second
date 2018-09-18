@@ -1,32 +1,30 @@
 <template>
   <div>
     <h1>你好</h1>
-    <!--<h2>传统表单上传</h2>-->
-    <!--<form action="https://upload-z1.qiniup.com" enctype="multipart/form-data" method="post">-->
-      <!--<input type="file" name="file">-->
-      <!--<br>-->
-      <!--<input type="text" name="token" v-model="token">-->
-      <!--<br>-->
-      <!--<button>-->
-        <!--提交-->
-      <!--</button>-->
-    <!--</form>-->
-    <h2>ajax上传图片</h2>
-    <input type="file" @change="handlechange">
-    <img :src="imgdata" class="img">
+    <el-form>
+      <el-form-item>
+        <updata v-model="userinfo.avatar"></updata>
+      </el-form-item>
+    </el-form>
+
+
   </div>
 
 
 </template>
 
 <script>
-  import axios from 'axios'
+import updata from '@/components/updata'
     export default {
         name: "index",
+      components:{
+        updata,
+      },
       data(){
           return {
-            token:'',
-            imgdata:''
+            userinfo:{
+              avatar:''
+            }
           }
       },
       methods:{
@@ -59,7 +57,9 @@
         }
       },
       created(){
-          this.gettoken();
+          this.userinfo={
+            ...this.$store.state.userinfo
+          }
       }
     }
 </script>

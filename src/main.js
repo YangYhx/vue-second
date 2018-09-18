@@ -7,9 +7,9 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { $axios } from "./util";
 import store from "./store";
-import bus from './bus'
 
-Vue.use(bus)
+
+
 Vue.prototype.$axios = $axios
 Vue.use(ElementUI)
 Vue.config.productionTip = false

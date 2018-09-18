@@ -45,7 +45,8 @@
 
   <el-pagination
     background
-    @current-change="currentPage "
+    @current-change="currentPage"
+    :page-size="5"
     layout="prev, pager, next"
     :total="count">
   </el-pagination>
@@ -59,14 +60,14 @@
         return {
           tabledata: [],
           count: 0,
-          page:1
+          page:1,
         }
       },
       methods: {
         getData() {
-          this.$axios.get('/user',{ pn: this.page,size: 5 }).then(res => {
-            if (res.code == 200) {
-              this.tabledata = res.data
+          this.$axios.get(`/user?pn=${this.page}&size=5`).then(res => {
+            if ( res.code == 200 ) {
+              this.tabledata = res.data;
               this.count= res.count
             }
           })
@@ -89,11 +90,11 @@
             });
           });
         },
-        currentPage(page){
+        currentPage(p){
+          // console.log(p)  //可以打印出来点击的页数
+          this.page = p;
+          this.getData();
 
-          this.page = page
-          this.getData()
-          console.log(page)
         }
       },
       created() {
@@ -116,5 +117,4 @@
     }
 
   }
-
 </style>

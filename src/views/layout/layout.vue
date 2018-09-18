@@ -5,17 +5,30 @@
 
   </div>
   <div class="sidebar">
+    <!--<div >-->
+      <!--<img :src="this.userdata.avatar" class="userinfo">-->
+    <!--</div>-->
     <div class="userinfo">
-      <img src="{this.userinfo.avatar}" alt="">
+
+      <!--<el-dropdown trigger="click">-->
+      <!--<span class="el-dropdown-link">-->
+        <upimg >
+      </upimg>
+      <!--</span>-->
+        <!--<el-dropdown-menu slot="dropdown">-->
+          <!--<el-dropdown-item command="{push:'/'}">修改个人信息</el-dropdown-item>-->
+          <!--<el-dropdown-item :to="{push:'/'}">退出登录</el-dropdown-item>-->
+        <!--</el-dropdown-menu>-->
+      <!--</el-dropdown>-->
     </div>
+
+
     <el-menu
       class="el-menu-vertical-demo"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
       :router="true">
-
-
 
       <el-submenu index="2">
 
@@ -28,9 +41,7 @@
           <el-menu-item index="/">用户登录</el-menu-item>
         <el-menu-item index="/layout/users">用户列表</el-menu-item>
           <el-menu-item index="/layout/adduser">添加用户</el-menu-item>
-
-
-
+          <el-menu-item index="/layout/userEdit">修改信息</el-menu-item>
 
       </el-submenu>
       <el-submenu index="3">
@@ -67,33 +78,42 @@
 </template>
 
 <script>
+  import upimg from '@/components/upimg'
 
     export default {
         name: "layout",
+      components:{
+          upimg,
+      },
       data(){
           return {
             userdata:{}
           }
       },
       created(){
-          this.$bus.$on('todata',(msg) => {
-            this.userdata = msg
-      })
+          this.userdata={
+            ...this.$store.state.userinfo
+          }
+          console.log(this.userdata)
       }
     }
 </script>
 
 <style scoped lang="scss">
 .layout{
-  .title{
-    text-align: center;
-    font-weight: 400;
-    height: 60px;
-    line-height: 60px;
-    border-bottom: 1px solid #f1f1f1;
+  .header{
+    height: 100px;
     margin-left: 200px;
+    text-align: center;
 
+    .title{
+      font-weight: 400;
+      height: 60px;
+      line-height: 60px;
+      border-bottom: 1px solid #f1f1f1;
+    }
   }
+
   .sidebar{
     position: fixed;
     left: 0;
@@ -104,12 +124,10 @@
     height: 100vh;
 
     .userinfo{
+      margin: 10px 40px 10px ;
       width: 60px;
       height: 60px;
       border-radius: 30px;
-      background: #f1f1f1;
-      overflow: hidden;
-      margin: 0 auto;
     }
 
 

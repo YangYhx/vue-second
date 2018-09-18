@@ -3,15 +3,15 @@
       <h1 class="login-title">欢迎来到后台管理界面</h1>
       <div class="login-box">
         <h1 class="title">请登录</h1>
-        <el-form class="form">
-        <el-form-item label="用户名" >
-          <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
+        <el-form class="form" :rules="rules" ref="form" :model="form">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="form.username" placeholder="请输入用户名" ></el-input>
         </el-form-item>
-        <el-form-item label="密码">
-          <el-input v-model="form.password" type="password"  placeholder="请输入密码"></el-input>
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="form.password" type="password"  placeholder="请输入密码" @keyup.enter.native="submitForm('form')"></el-input>
         </el-form-item>
         </el-form>
-        <el-button @click="hendlelogin" type="primary" class="login-btn" :loading='isloading' :plain="true">
+        <el-button  @click="submitForm('form')"  type="primary" class="login-btn" :loading='isloading' :plain="true">
           登录
         </el-button>
       </div>
@@ -22,29 +22,74 @@
     export default {
       name:'login',
       data(){
+        let checkname=(rule,value,callback ) => {
+          if (!value){
+            return callback(new Error('用户名不能为空'))
+          }else {
+            callback();
+          }
+        };
+        let checkpassword=(rule,value,callback) => {
+          if (!value) {
+            callback(new Error('请输入密码'))
+          } else {
+            if(value.length < 5){
+              callback(new Error('密码长度最少5位,请输入合法的密码'))
+            }
+            else {
+              callback();
+            }
+
+          }
+        }
           return{
             form:{
               username:'',
               password:''
 
             },
+            rules:{
+              username:[{ validator: checkname, trigger: 'blur' }],
+              password:[{validator: checkpassword, trigger: 'blur'}]
+            },
             isloading:false,
             userdata:{}
           }
       },
       methods:{
-          hendlelogin(){
-            this.isloading = true;
+          // hendlelogin(){
+          //   this.isloading = true;
+          //     this.$axios.post('/login',this.form).then( res => {
+          //       console.log(res)
+          //       if(res.code == 200){
+          //         this.$message.success(res.msg)
+          //
+
+          //         setTimeout(() => {
+          //           this.$router.push('/layout/index')
+          //         },3000)
+          //
+          //       }else {
+          //         this.$message.error(res.msg);
+          //       }
+          //       this.isloading = false;
+          //     }).catch( err => {
+          //       this.isloading = false;
+          //     })
+          // },
+        submitForm(formName) {
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+
+              this.isloading = true;
               this.$axios.post('/login',this.form).then( res => {
                 console.log(res)
                 if(res.code == 200){
+                  this.$store.commit('CHANGE_USERINFO',res.data)
                   this.$message.success(res.msg)
-
-                  this.$bus.$emit('todata',res.data)
                   setTimeout(() => {
                     this.$router.push('/layout/index')
                   },3000)
-
                 }else {
                   this.$message.error(res.msg);
                 }
@@ -52,7 +97,12 @@
               }).catch( err => {
                 this.isloading = false;
               })
-          }
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          });
+        }
       },
 
     }

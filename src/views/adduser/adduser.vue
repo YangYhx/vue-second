@@ -14,17 +14,14 @@
           <el-input v-model="formdata.nickname" placeholder="昵称"></el-input>
         </el-form-item>
         <el-form-item label="邮箱">
-          <el-input v-model="formdata.emall" placeholder="填写邮箱"></el-input>
+          <el-input v-model="formdata.email" placeholder="填写邮箱"></el-input>
         </el-form-item>
         <el-form-item label="个性签名">
           <el-input v-model="formdata.desc" type="textarea" placeholder="个性签名"></el-input>
         </el-form-item>
         <el-form-item label="头像">
-          <updata v-model="formdata.avatar"  ></updata>
+          <updata v-model="formdata.avatar"  @success="uploader"></updata>
         </el-form-item>
-
-        <!--<updata></updata>-->
-
       <el-button type="primary" size="small" @click="hendlecommit">添加</el-button>
       </el-form>
     </div>
@@ -40,11 +37,10 @@
               password:'',
               desc:'',
               avatar:'',
-              emall:'',
+              email:'',
               nickname:'',
               cheackpassword:''
             },
-            imageUrl: ''
           }
         },
       components:{
@@ -54,13 +50,18 @@
         hendlecommit() {
           if(this.formdata.password != this.formdata.cheackpassword){
             this.$message.error("两次输入的密码不一致")
+          }else {
+            this.$axios.post('/user', this.formdata).then(res => {
+              console.log(res)
+              if(res.code == 200){
+                this.$message.success(res.msg)
+              }
+            })
           }
-          this.$axios.post('/user', this.formdata).then(res => {
-            console.log(res)
-            if(res.code == 200){
-              this.$message.success("两次输入的密码不一致")
-            }
-          })
+
+        },
+        uploader(url){
+          this.formdata.avatar = url
         }
       }
 

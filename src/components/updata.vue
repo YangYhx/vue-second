@@ -1,18 +1,22 @@
 <template>
       <label class="upload-wrap">
         <i v-if="isimg" class="el-icon-plus"></i>
-        <input type="file"  style="display: none" @change="upload">
         <img  class="image"  :src="imgurl">
+        <input type="file"  style="display: none" @change="upload">
       </label>
 </template>
-
 <script>
   import axios from 'axios'
     export default {
         name: "updata",
+      props:{
+          value:{
+            type: String
+          }
+      },
       data(){
           return {
-            imgurl:'',
+            imgurl:this.value,
             token:'',
             isimg:true
           }
@@ -20,31 +24,35 @@
       methods:{
           gettoken(){
             axios.get('http://upload.yaojunrong.com/getToken').then( res => {
-              this.token = res.data.data
+                this.token = res.data.data
             })
-
           },
         upload(event){
           let file = event.target.files[0]
           let formData = new FormData()
-
           formData.append('file',file)
           formData.append('token',this.token)
-
-
           axios.post('https://upload-z1.qiniup.com',formData ,{
             headers:{
               'Content-type':'multipart/form-data'
             }
           }).then( res => {
+            this.isimg = false
             console.log(res.data.url)
             this.imgurl = res.data.url
-            this.isimg = false
+            this.$emit('success',res.data.url)
+            this.$emit('input',res.data.url)
+            this.$emit('change',res.data.url)
           })
         }
       },
       created(){
           this.gettoken()
+      },
+      watch:{
+          value(val){
+            this.imgurl = val
+          }
       }
 
     }
