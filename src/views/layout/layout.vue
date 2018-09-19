@@ -2,26 +2,21 @@
 <div class="layout">
   <div class="header">
     <h1 class="title">云书后台操作系统</h1>
-
   </div>
   <div class="sidebar">
-    <!--<div >-->
-      <!--<img :src="this.userdata.avatar" class="userinfo">-->
-    <!--</div>-->
-    <div class="userinfo">
+    <div >
 
-      <!--<el-dropdown trigger="click">-->
-      <!--<span class="el-dropdown-link">-->
-        <upimg >
-      </upimg>
-      <!--</span>-->
-        <!--<el-dropdown-menu slot="dropdown">-->
-          <!--<el-dropdown-item command="{push:'/'}">修改个人信息</el-dropdown-item>-->
-          <!--<el-dropdown-item :to="{push:'/'}">退出登录</el-dropdown-item>-->
-        <!--</el-dropdown-menu>-->
-      <!--</el-dropdown>-->
+      <el-dropdown trigger="click" @command="hendkeCommand" >
+      <span>
+        <img :src="this.userdata.avatar" class="userinfo">
+      </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="/layout/Editpass">修改个人密码</el-dropdown-item>
+          <el-dropdown-item command="/">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+
     </div>
-
 
     <el-menu
       class="el-menu-vertical-demo"
@@ -39,9 +34,9 @@
           <!--<template slot="title">用户</template>-->
         <el-menu-item index="/layout/index">首页</el-menu-item>
           <el-menu-item index="/">用户登录</el-menu-item>
-        <el-menu-item index="/layout/users">用户列表</el-menu-item>
+        <el-menu-item index="/layout/userslist">用户列表</el-menu-item>
           <el-menu-item index="/layout/adduser">添加用户</el-menu-item>
-          <el-menu-item index="/layout/userEdit">修改信息</el-menu-item>
+          <el-menu-item index="/layout/userEdit">修改个人信息</el-menu-item>
 
       </el-submenu>
       <el-submenu index="3">
@@ -51,19 +46,25 @@
           <span>分类管理</span>
         </template>
          <el-menu-item index="/layout/classlist">分类列表</el-menu-item>
-          <el-menu-item index="1-3">添加分类</el-menu-item>
-          <el-menu-item index="1-4">删除分类</el-menu-item>
-          <el-menu-item index="1-5">修改书籍</el-menu-item>
+          <el-menu-item index="/layout/classAdd">添加分类</el-menu-item>
+          <!--<el-menu-item index="/layout/classEdit">修改分类</el-menu-item>-->
       </el-submenu>
       <el-submenu index="4">
-
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>图书管理</span>
         </template>
         <el-menu-item index="1-3">添加图书</el-menu-item>
-        <el-menu-item index="1-4">删除图书</el-menu-item>
         <el-menu-item index="1-5">修改图书</el-menu-item>
+      </el-submenu>
+
+      <el-submenu index="5">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>轮播图管理</span>
+        </template>
+        <el-menu-item index="/layout/addswiper">添加轮播图</el-menu-item>
+        <el-menu-item index="1-5">删除轮播图</el-menu-item>
       </el-submenu>
 
 
@@ -79,7 +80,7 @@
 
 <script>
   import upimg from '@/components/upimg'
-
+  import Router from '@/router'
     export default {
         name: "layout",
       components:{
@@ -95,6 +96,23 @@
             ...this.$store.state.userinfo
           }
           console.log(this.userdata)
+      },
+      methods:{
+        hendkeCommand(command){
+          if(command == '/'){
+            this.$axios.get('/logout')
+            Router.push(`${command}`)
+          }else {
+            Router.push(`${command}`)
+          }
+
+        },
+        // hendleuserEdit(){
+        //   Router.push('/layout/userEdit')
+        // },
+        // hendleuserout(){
+        //   Router.push('/')
+        // }
       }
     }
 </script>
@@ -102,7 +120,6 @@
 <style scoped lang="scss">
 .layout{
   .header{
-    height: 100px;
     margin-left: 200px;
     text-align: center;
 

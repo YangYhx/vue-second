@@ -32,8 +32,8 @@
         label="操作"
         width="250">
         <template slot-scope="scope">
-          <el-button size="small" type="primary">
-            编辑
+          <el-button size="small" type="primary" @click="hendleDetail(scope.row)">
+            查看详情
           </el-button>
           <el-button @click="hendledelete(scope.row._id)" size="small" type="danger">
             删除
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+  import Router from '@/router'
     export default {
       data() {
         return {
@@ -66,14 +67,20 @@
       methods: {
         getData() {
           this.$axios.get(`/user?pn=${this.page}&size=5`).then(res => {
-            if ( res.code == 200 ) {
+            if ( res.code === 200 ) {
               this.tabledata = res.data;
               this.count= res.count
             }
           })
         },
+        hendleDetail(userinfo){
+          console.log(userinfo)
+          this.$store.commit('CHANGE_USERDETAIL',userinfo);
+          Router.push('/layout/userDetail')
+        },
         hendledelete(id) {
-          this.$confirm('此操作将永久删除该文件, 是否继续?', '警告', {
+          console.log(id)
+          this.$confirm('此操作将永久删除文件, 是否继续?', '警告', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning',
@@ -109,9 +116,9 @@
     .table{
       margin:30px auto;
       .avatar{
-        width: 90px;
-        height: 90px;
-        border-radius:45px;
+        width: 60px;
+        height: 60px;
+        border-radius:30px;
 
       }
     }

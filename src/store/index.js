@@ -11,12 +11,31 @@ const store = new Vuex.Store({
       username:'',
       avatar:'',
       desc:'',
-      nickname:''
+      nickname:'',
+    },
+    userdetail:{
+      username:'',
+      avatar:'',
+      desc:'',
+      nickname:'',
+      email:''
+    },
+    classData:{
+      title:'',
+      icon:'',
+      index:'',
+      _id:''
     }
   },
   mutations:{
     CHANGE_USERINFO(state,userinfo){
       state.userinfo = userinfo
+    },
+    CHANGE_CLASSDATA(state,classdata){
+      state.classData = classdata
+    },
+    CHANGE_USERDETAIL(state,userdetail){
+      state.userdetail = userdetail
     }
   },
   actions:{},

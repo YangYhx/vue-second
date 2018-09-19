@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import updataimg from '@/components/updata'
+  import updataimg from '@/components/updata';
     export default {
     // props:{
     //   value:{
@@ -59,15 +59,15 @@
       methods:{
         hendleclick(){
           this.$axios.put('/user/userInfo',this.formdata).then( res => {
-            console.log(res)
-            if(res.code == 200){
-              let userinfo = res.data
-              this.$store.commit('CHANGE_USERINFO',userinfo)
+            console.log(res);
+            if( res.code === 200 ){
+              let userinfo = res.data;
+              this.$store.commit('CHANGE_USERINFO',userinfo);
               this.initdata();
-              this.$message.success('修改成功')
+              this.$message.success('修改成功');
             }
 
-          })
+          });
         },
         initdata(){
             this.formdata = {

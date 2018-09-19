@@ -48,6 +48,9 @@ const xhr = {
   },
   put(url,data,config){
     return this.fes(url,data,config,'put')
+  },
+  del(url,data,config){
+    return this.fes(url,data,config,'delete')
   }
 }
 
