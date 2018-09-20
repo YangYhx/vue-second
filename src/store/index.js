@@ -12,6 +12,7 @@ const store = new Vuex.Store({
       avatar:'',
       desc:'',
       nickname:'',
+      email:''
     },
     userdetail:{
       username:'',

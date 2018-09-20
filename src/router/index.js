@@ -18,7 +18,9 @@ const coms = {
   userDetail: () => import('@/views/users/userDetail'),
   bookslist: () => import('@/views/books/bookslist'),
   Editpass: () => import('@/views/users/Editpass'),
-  addSwiper: () => import('@/views/swiper/addswiper')
+  addSwiper: () => import('@/views/swiper/addswiper'),
+  swiperlist: () => import('@/views/swiper/swiperlist'),
+  addbook: () => import('@/views/books/addbooks')
 }
 export default new Router({
   routes: [
@@ -97,6 +99,24 @@ export default new Router({
           name:'addswiper',
           meta:{title:'添加轮播图'},
           component:coms.addSwiper
+        },
+        {
+          path:'swiperlist',
+          name:'swiperlist',
+          meta:{title:'轮播图列表'},
+          component:coms.swiperlist
+        },
+        {
+          path:'Editswiper',
+          name:'Editswiper',
+          meta:{title:'修改轮播图'},
+          component:coms.addSwiper
+        },
+        {
+          path:'addbook',
+          name:'addbook',
+          meta:{title:'添加图书'},
+          component:coms.addbook
         }
 
 

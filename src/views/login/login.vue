@@ -3,7 +3,7 @@
       <h1 class="login-title">欢迎来到后台管理界面</h1>
       <div class="login-box">
         <h1 class="title">请登录</h1>
-        <el-form class="form" :rules="rules" ref="form" :model="form">
+        <el-form class="login-form" :rules="rules" ref="form" :model="form" label-width="100" label-position="left">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username" placeholder="请输入用户名" ></el-input>
         </el-form-item>
@@ -57,26 +57,6 @@
           }
       },
       methods:{
-          // hendlelogin(){
-          //   this.isloading = true;
-          //     this.$axios.post('/login',this.form).then( res => {
-          //       console.log(res)
-          //       if(res.code == 200){
-          //         this.$message.success(res.msg)
-          //
-
-          //         setTimeout(() => {
-          //           this.$router.push('/layout/index')
-          //         },3000)
-          //
-          //       }else {
-          //         this.$message.error(res.msg);
-          //       }
-          //       this.isloading = false;
-          //     }).catch( err => {
-          //       this.isloading = false;
-          //     })
-          // },
         submitForm(formName) {
           this.$refs[formName].validate((valid) => {
             if (valid) {

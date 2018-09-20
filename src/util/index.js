@@ -11,38 +11,41 @@ const fe = axios.create({
 const xhr = {
   get( url ,data, config){
   return new Promise( (resolve , reject) => {
-      fe.get(url,{
-        params:{
-          data,
-        }
-      },config).then( res => {
-        if(res.code == 401){
+    fe.get(url, {
+      params: {
+        data,
+      }
+    }, config).then(res => {
+      if (res.data.code == 401) {
+        Message.error("登录状态失效，正在跳转登录界面");
+        Router.push('/')
+      } else {
+        resolve(res.data)
+      }
+    })
+  })
+  },
+  post(url, data,config){
+    return new Promise( (resolve , reject) => {
+      fe.post(url, data, config).then(res => {
+        if(res.data.code == 401){
           Message .error("登录状态失效，正在跳转登录界面");
           Router.push('/')
         }else {
           resolve(res.data)
         }
-      }).catch( err => {
-        reject(err)
-      })
-    })
-
-  },
-  post(url, data,config){
-    return new Promise( (resolve , reject) => {
-      fe.post(url,data,config).then( res => {
-          resolve(res.data)
-      }).catch( err => {
-        reject(err)
       })
     })
   },
   fes(url,data,config,methods){
     return new Promise( (resolve , reject) => {
       fe[methods](url,data,config).then( res => {
-        resolve(res.data)
-      }).catch( err => {
-        reject(err)
+        if(res.data.code == 401){
+          Message .error("登录状态失效，正在跳转登录界面");
+          Router.push('/')
+        }else {
+          resolve(res.data)
+        }
       })
     })
   },

@@ -54,8 +54,8 @@
           <i class="el-icon-location"></i>
           <span>图书管理</span>
         </template>
-        <el-menu-item index="1-3">添加图书</el-menu-item>
-        <el-menu-item index="1-5">修改图书</el-menu-item>
+        <el-menu-item index="/layout/addbook">添加图书</el-menu-item>
+
       </el-submenu>
 
       <el-submenu index="5">
@@ -63,8 +63,8 @@
           <i class="el-icon-location"></i>
           <span>轮播图管理</span>
         </template>
+        <el-menu-item index="/layout/swiperlist">轮播图列表</el-menu-item>
         <el-menu-item index="/layout/addswiper">添加轮播图</el-menu-item>
-        <el-menu-item index="1-5">删除轮播图</el-menu-item>
       </el-submenu>
 
 

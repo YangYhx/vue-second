@@ -1,16 +1,7 @@
 <template>
   <div>
     <h1>你好</h1>
-    <el-form>
-      <el-form-item>
-        <updata v-model="userinfo.avatar"></updata>
-      </el-form-item>
-    </el-form>
-
-
   </div>
-
-
 </template>
 
 <script>
@@ -66,7 +57,6 @@ import updata from '@/components/updata'
 
 <style scoped>
 .img{
-
   width: 80px;
   height: 80px;
 }

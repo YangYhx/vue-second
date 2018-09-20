@@ -34,11 +34,7 @@
 <script>
   import updataimg from '@/components/updata';
     export default {
-    // props:{
-    //   value:{
-    //     type:String
-    //   }
-    // },
+
       data(){
           return {
             formdata:{
@@ -75,20 +71,15 @@
             }
         }
       },
-      watch:{
-        value(val){
-          this.formdata.avatar = val
-        }
-      }
     }
 </script>
 
 <style scoped lang="scss">
 .wrap{
   height: 500px;
-text-align: center;
+  text-align: center;
   .form-wrap{
-  width: 400px;
+    width: 400px;
     margin: 20px auto;
   }
 }

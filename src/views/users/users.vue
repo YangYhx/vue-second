@@ -44,6 +44,7 @@
   </div>
 
   <el-pagination
+    style="text-align: center"
     background
     @current-change="currentPage"
     :page-size="5"
@@ -114,6 +115,8 @@
 <style scoped lang="scss">
   .userlist{
     .table{
+      width: 1020px;
+      height: 500px;
       margin:30px auto;
       .avatar{
         width: 60px;

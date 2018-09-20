@@ -1,7 +1,7 @@
 <template>
       <label class="upload-wrap">
         <i v-if="isimg" class="el-icon-plus"></i>
-        <img  class="image"  :src="imgurl">
+        <img  class="image"  :src="imgurl" v-else>
         <input type="file"  style="display: none" @change="upload">
       </label>
 </template>
@@ -62,8 +62,8 @@
   .upload-wrap{
     position: relative;
     display: block;
-    /*width: 80px;*/
-    /*height: 80px;*/
+    width: 80px;
+    height: 80px;
     border: 1px solid #e8e8e8;
     border-radius: 10px;
     cursor: pointer;

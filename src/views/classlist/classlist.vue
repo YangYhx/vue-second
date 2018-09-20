@@ -41,6 +41,7 @@
       </el-table-column>
     </el-table>
     <el-pagination
+      style="text-align: center"
       background
       @current-change="currentPage"
       :page-size="10"
@@ -109,8 +110,8 @@
 <style scoped lang="scss">
   .table-wrap{
     margin: 20px auto;
-    width: 600px;
-    height: 30px;
+    width: 720px;
+    height: 988px;
     .icon{
       width: 60px;
       height: 60px;
