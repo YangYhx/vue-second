@@ -69,6 +69,7 @@
             this.formdata = {
               ...this.$store.state.userinfo
             }
+            console.log('this.formdata.avatar :'+this.formdata.avatar)
         }
       },
     }

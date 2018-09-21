@@ -1,6 +1,6 @@
 <template>
       <label class="upload-wrap">
-        <i v-if="isimg" class="el-icon-plus"></i>
+        <i v-if="!imgurl" class="el-icon-plus"></i>
         <img  class="image"  :src="imgurl" v-else>
         <input type="file"  style="display: none" @change="upload">
       </label>
@@ -18,7 +18,6 @@
           return {
             imgurl:this.value,
             token:'',
-            isimg:true
           }
       },
       methods:{
@@ -37,7 +36,6 @@
               'Content-type':'multipart/form-data'
             }
           }).then( res => {
-            this.isimg = false
             console.log(res.data.url)
             this.imgurl = res.data.url
             this.$emit('success',res.data.url)
@@ -54,7 +52,6 @@
             this.imgurl = val
           }
       }
-
     }
 </script>
 

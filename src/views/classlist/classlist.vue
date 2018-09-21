@@ -14,19 +14,20 @@
       <el-table-column
         prop="title"
         label="分类名"
-        width="180">
+        width="220">
       </el-table-column>
       <el-table-column
         prop="icon"
         label="图标"
-        width="180">
+        width="220">
         <template slot-scope="scope">
           <img :src="scope.row.icon"  class="icon">
         </template>
       </el-table-column>
       <el-table-column
         label="操作"
-        width="360">
+        width="360"
+      v-if="isshow">
         <template slot-scope="scope">
           <el-button size="mini" @click="hendleBooks(scope.row)" type="primary">
             查看书籍
@@ -39,6 +40,20 @@
           </el-button>
         </template>
       </el-table-column>
+
+      <el-table-column
+        label="操作"
+        width="360"
+        v-else>
+        <template slot-scope="scope">
+          <el-button size="mini" @click="hendleBooks(scope.row)" type="primary">
+            查看书籍
+          </el-button>
+        </template>
+      </el-table-column>
+
+
+
     </el-table>
     <el-pagination
       style="text-align: center"
@@ -63,7 +78,8 @@
         return {
           classData:[],
           page:1,
-          count:0
+          count:0,
+          isshow:true
         }
       },
       methods:{
@@ -77,7 +93,7 @@
             })
           },
         hendleEdit(classdata){
-            console.log(classdata)
+          console.log(classdata);
           this.$store.commit('CHANGE_CLASSDATA',classdata)
           Router.push('/layout/classEdit')
         },
@@ -102,7 +118,8 @@
 
       },
       created(){
-          this.getData()
+          this.getData();
+          this.isshow = this.$route.name === 'classlist' ? true : false
       }
     }
 </script>
@@ -110,7 +127,7 @@
 <style scoped lang="scss">
   .table-wrap{
     margin: 20px auto;
-    width: 720px;
+    width: 800px;
     height: 988px;
     .icon{
       width: 60px;

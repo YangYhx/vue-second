@@ -5,7 +5,7 @@ import Router from '../router'
 const baseURL = '/api/admin'
 const fe = axios.create({
   baseURL,
-  timeout:10000,
+  timeout:20000,
 })
 
 const xhr = {

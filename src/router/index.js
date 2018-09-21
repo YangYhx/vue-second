@@ -20,7 +20,8 @@ const coms = {
   Editpass: () => import('@/views/users/Editpass'),
   addSwiper: () => import('@/views/swiper/addswiper'),
   swiperlist: () => import('@/views/swiper/swiperlist'),
-  addbook: () => import('@/views/books/addbooks')
+  addbook: () => import('@/views/books/addbooks'),
+  bookdetail: () => import('@/views/books/bookdetail')
 }
 export default new Router({
   routes: [
@@ -117,6 +118,18 @@ export default new Router({
           name:'addbook',
           meta:{title:'添加图书'},
           component:coms.addbook
+        },
+        {
+          path:'lookbooks',
+          name:'lookbooks',
+          meta:{title:'按照分类查看书籍'},
+          component:coms.classlist
+        },
+        {
+          path:'bookdetail',
+          name:'bookdetail',
+          meta:{title:'修改书籍'},
+          component:coms.bookdetail
         }
 
 

@@ -62,7 +62,6 @@
           this.classData = {
             ...this.$store.state.classData
           }
-          console.log(this.classData.index)
       }
     }
 </script>

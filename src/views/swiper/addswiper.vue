@@ -24,7 +24,7 @@
 
           <div class="book-item clearfix" v-if="selectedBook[0]">
             <div class="img-wrap fll">
-              <img :src="selectedBook[0].img" alt="" class="img-item">
+              <img :src="selectedBook[0].img">
             </div>
             <div class="selectbooks fll">
               <div class="title">
@@ -145,7 +145,6 @@
           this.$axios.get(`/swiper/${this.$route.query.id}`).then( res => {
             console.log(res)
             this.formdata = {
-              ...this.formdata,
               ...res.data,
               book:res.data.book._id,
               category:res.data.book.type
@@ -195,6 +194,16 @@
   line-height: 1.5;
   padding: 15px;
   border-radius: 4px;
+}
+
+.img-wrap {
+  width: 100px;
+  height: 120px;
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 

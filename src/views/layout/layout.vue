@@ -47,7 +47,6 @@
         </template>
          <el-menu-item index="/layout/classlist">分类列表</el-menu-item>
           <el-menu-item index="/layout/classAdd">添加分类</el-menu-item>
-          <!--<el-menu-item index="/layout/classEdit">修改分类</el-menu-item>-->
       </el-submenu>
       <el-submenu index="4">
         <template slot="title">
@@ -55,6 +54,7 @@
           <span>图书管理</span>
         </template>
         <el-menu-item index="/layout/addbook">添加图书</el-menu-item>
+        <el-menu-item index="/layout/lookbooks">按照分类查看图书</el-menu-item>
 
       </el-submenu>
 

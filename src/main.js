@@ -7,8 +7,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { $axios } from "./util";
 import store from "./store";
+import uploadImg from '@/components/updata'
 
 
+Vue.component('upload-img', uploadImg)
 
 Vue.prototype.$axios = $axios
 Vue.use(ElementUI)

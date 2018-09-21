@@ -26,7 +26,17 @@ const store = new Vuex.Store({
       icon:'',
       index:'',
       _id:''
-    }
+    },
+    bookData:{
+      author:'',
+      desc:'',
+      img:'',
+      title:'',
+      type:'',
+      _id:'',
+      index:''
+
+    },
   },
   mutations:{
     CHANGE_USERINFO(state,userinfo){
@@ -37,6 +47,9 @@ const store = new Vuex.Store({
     },
     CHANGE_USERDETAIL(state,userdetail){
       state.userdetail = userdetail
+    },
+    CHANGE_BOOKDATA(state,bookdata){
+      state.bookData = bookdata
     }
   },
   actions:{},
